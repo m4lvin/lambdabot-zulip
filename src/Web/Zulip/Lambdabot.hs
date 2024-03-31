@@ -11,7 +11,7 @@ import           Control.Monad (when)
 import           Control.Monad.IO.Class
 import           Data.Char (isDigit)
 import           Data.List (stripPrefix)
-import           Data.Monoid ((<>))
+import           Data.Maybe (fromMaybe)
 import qualified Data.Set as Set
 import           Data.Text (Text)
 import qualified Data.Text as T
@@ -37,9 +37,7 @@ import           System.IO (hSetBuffering, stdout, BufferMode(LineBuffering))
 -- > "error: Variable not in scope: help"
 dropErrorLinePosition :: String -> String
 dropErrorLinePosition e =
-  case parseReturnRest interactiveErrorPrefixParser e of
-    Just rest -> rest
-    Nothing -> e -- if the parse fails we fallback on printing the whole error
+  fromMaybe e (parseReturnRest interactiveErrorPrefixParser e) -- if the parse fails we fallback on printing the whole error
   where
     interactiveErrorPrefixParser :: ReadP ()
     interactiveErrorPrefixParser = do
@@ -221,7 +219,7 @@ runZulipLambdabot settings = do
 
 
 -- | Command line arguments for this program.
-data Args = Args
+newtype Args = Args
   { argsSettingsFile :: FilePath -- ^ Path to the settings YAML file
   } deriving (Eq, Ord, Show)
 
