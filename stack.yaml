@@ -1,9 +1,12 @@
-resolver: lts-11.22
+resolver: lts-21.25
 packages:
   - .
 extra-deps:
-  - mueval-0.9.3@sha256:9ecdbdc8f28ed7bc3f6f6cb5c2708e69f3b099db812bd2b8a51730915f7dab9e
+  - mueval-0.9.4
   - show-0.6@sha256:073c283f62d56cab2a2de5455125c7fc2d55642bac4cf0e778ed6525226a44ec
   # TODO Remove pin once https://github.com/yamadapc/hzulip/pull/7 is merged
-  - git: https://github.com/nh2/hzulip.git
-    commit: eb775b763309ecdfc97fc7d978e9b4285c9b88b2
+  #- git: https://github.com/nh2/hzulip.git
+  #  commit: eb775b763309ecdfc97fc7d978e9b4285c9b88b2
+  # TODO Remove pin whenever m4lvin/hzulip is merged to yamadapc/hzulip
+  - git: https://github.com/m4lvin/hzulip.git
+    commit: 711ec01bdaf804f5c996dd75d592703ee4737e44
